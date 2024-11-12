@@ -1,0 +1,15 @@
+
+<div [@pageTransition]>
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <div
+      class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4"
+    >
+      
+      
+    </div>
+ <data-table (form)="getFormData($event)" (goToPage)="goToPage($event)" [idFieldName]="'couponid'" [modelObj]="emptyCoupon" [pagination]="pagination" [rowData]="coupons"></data-table>
+  </div>
+  <app-alert [show]="showAlert" [type]="alert">
+    <p>{{alertMsg}}</p>
+  </app-alert>
+</div>

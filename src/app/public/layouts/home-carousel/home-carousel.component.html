@@ -1,0 +1,60 @@
+<div class="flex flex-row-reverse w-full gap-5 lg:gap-10">
+  <div class=" w-[499px] relative">
+
+    <ngx-slick-carousel  class=""
+                            #slickModal="slick-carousel" 
+                            [config]="slideConfig" 
+                            (beforeChange)="beforeChange($event)"
+                            (afterChange)="afterChange($event)"
+                            >
+            @for (slide of items; track $index) {
+                <div ngxSlickItem class="slide" >
+                      <img src="{{ slide.imageUrl }}" (error)="imageNotFound($index)" alt="" class="w-full">                    
+                </div>
+            }
+          </ngx-slick-carousel>
+          <div class="w-full flex justify-between absolute z-20  bottom-[45%] px-6">
+            <button class=" bg-slate-300 py-2 rounded-lg bg-opacity-50" (click)="[slickModal.slickPrev(), ]">
+              <svg class=" fill-slate-500" width="30px" height="30px" viewBox="-4.5 0 20 20"xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <g transform="translate(-385.000000, -6679.000000)" >
+                  <g id="icons" transform="translate(56.000000, 160.000000)" >
+                    <path d="M338.61,6539 L340,6537.594 L331.739,6528.987 L332.62,6528.069 L332.615,6528.074 L339.955,6520.427 L338.586,6519 C336.557,6521.113 330.893,6527.014 329,6528.987 C330.406,6530.453 329.035,6529.024 338.61,6539" id="arrow_left-[#334]">
+                    </path>
+                  </g>
+                </g>              
+              </svg>
+            </button>
+            <button class=" bg-slate-300 py-2 rounded-lg bg-opacity-50" (click)="slickModal.slickNext()">
+              <svg class=" fill-slate-500" width="30px" height="30px" viewBox="-4.5 0 20 20"xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <g transform="translate(-425.000000, -6679.000000)" >
+                    <g id="icons" transform="translate(56.000000, 160.000000)" >
+                      <path d="M370.39,6519 L369,6520.406 L377.261,6529.013 L376.38,6529.931 L376.385,6529.926 L369.045,6537.573 L370.414,6539 C372.443,6536.887 378.107,6530.986 380,6529.013 C378.594,6527.547 379.965,6528.976 370.39,6519" id="arrow_right-[#333]">
+        
+        </path>
+                    </g>
+                </g>
+          
+        </svg>
+            </button>
+  
+          </div>
+  </div>
+      <div>
+        @for (slide of items; track $index) {
+          <div class="w-20 relative">
+            <div  class=" cursor-pointer border-2 mt-2 border-emerald-800 border-opacity-10 rounded-md px-1" >
+              <img src="{{ slide.imageUrl }}" alt="" class="">
+    
+            </div>
+            <div (click)="[slickModal.slickGoTo($index), selectedIndex = $index]" class="left-0 top-0 w-full h-full z-20 absolute bg-opacity-10 rounded-md" [ngClass]="$index == selectedIndex ? 'bg-slate-400 ': ''">
+
+            </div>
+          </div>
+      }
+
+      </div>
+
+</div>
+    
+
+    

@@ -1,0 +1,54 @@
+<nav class="ng-wind-table-pagination" aria-label="Table navigation">
+    <div class="ng-wind-table-page-view ">
+      Rows per page:
+      <div class="flex mx-2 rounded-md">
+        <select
+          id="states"
+          class="bg-gray-100 text-gray-900 block w-full p-1 rounded-sm text-xs"
+        >
+        @for (rpp of rowPerPage; track $index) {
+          @if (rpp < pagination.count) {
+            <option [value]="rpp">rpp</option>
+
+          }
+
+        }
+          
+        </select>
+      </div>
+      <span class="font-semibold text-gray-900 dark:text-slate-700 ms-4 me-1"
+        >{{currentPage==1? 1: ((currentPage-1)*pagination.size)+1}}-{{
+        pagination.size*currentPage > pagination.count? pagination.count :
+        pagination.size*currentPage}}
+        of
+        </span>
+        
+      <span class="font-semibold dark:text-slate-700 text-gray-900 ms-1"
+        >{{pagination.count}}</span
+      >
+    </div>
+
+    <ul class="inline-flex -space-x-px rtl:space-x-reverse text-xs h-8">
+      <li>
+        <a class="ng-wind-page-prev" (click)="prev()">
+          Prev
+        </a>
+      </li>
+      @if(pages.length>0){
+
+      <li *ngFor="let page of pages">
+        <a
+          (click)="[pagination.page = page, goToPage.emit(pagination), currentPage = page]"
+          aria-current="page"
+          [ngClass]="currentPage == page ? 'active-page' : 'bg-white hover:bg-gray-100' "
+          class="page-number"
+        >
+          {{page}}
+        </a>
+      </li>
+      }
+      <li>
+        <a class="ng-wind-page-next" (click)="next()">Next</a>
+      </li>
+    </ul>
+  </nav>

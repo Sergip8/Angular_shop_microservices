@@ -1,0 +1,277 @@
+<div class="card p-5 h-full">
+  <div class="card-title">
+    <!-- <h3 class="text-xl font-bold leading-none mb-8">Table</h3> -->
+  </div>
+  <div class="mt-3 h-full ">
+    <div class="sm:rounded-lg h-full">
+      <div class="data-table">
+        <div class="flex items-center justify-between mb-3">
+          <div class="">
+            <select
+              id="countries"
+              class="border border-gray-300 text-gray-600 text-base rounded-lg block w-full py-2 px-4 focus:outline-none"
+            >
+              <option selected>Choose a country</option>
+              <option value="US">United States</option>
+              <option value="CA">Canada</option>
+              <option value="FR">France</option>
+              <option value="DE">Germany</option>
+            </select>
+          </div>
+
+          <button
+            (click)="isCreate = !isCreate"
+            class="relative align-middle select-none font-sans font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] h-9 max-h-[40px] rounded-lg text-xs bg-green-500 text-white shadow-md shadow-green-500/20 hover:shadow-lg hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
+            type="button"
+          >
+            <span
+              class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+            >
+              <img
+                class="w-5"
+                [src]="!isCreate? '../../../../../assets/images/icons/plus.svg': '../../../../../assets/images/icons/cancel.svg'"
+                alt=""
+            /></span>
+          </button>
+          <!-- <label for="table-search" class="sr-only">Search</label> -->
+          <div class="relative flex items-center">
+            <div
+              class="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none"
+            >
+              <svg
+                class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                aria-hidden="true"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+            </div>
+
+            <input
+              #search
+              (keydown.enter)="getProductByCode(search.value)"
+              type="text"
+              id="table-search"
+              class="search block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Search for items"
+            />
+            <div 
+            [ngClass]="{
+              'transition ease-out duration-300 transform opacity-100 scale-100': isDropdownOpen,
+              'transition ease-in duration-75 transform opacity-0 scale-0': !isDropdownOpen
+            }"
+            class="absolute right-0">
+              <button
+                (click)="getProductByCode(search.value)"
+                class="relative align-middle select-none font-sans font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] h-9 max-h-[40px] rounded-e-lg text-xs bg-green-500 text-white shadow-md shadow-green-500/20 hover:shadow-lg hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
+                type="button"
+              >
+                <span
+                  class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                  ><img
+                    class="w-5"
+                    src="../../../../../assets/images/icons/arrow-right.svg"
+                    alt=""
+                /></span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="table-container h-full">
+          <table
+            class="w-full flex flex-row overflow-hidden text-sm text-left rtl:text-right text-gray-500 dark:text-gray-800"
+          >
+            <thead class="ng-wind-table-header">
+              @for (d of rowData; track $index){
+              <tr  class=" flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-1 sm:mb-0">
+                @for (name of keys; track $index){
+
+                <th scope="col" class="ng-wind-header-item py-3 dark:text-slate-100 ">
+                  {{name}}
+                </th>
+                }
+                <th scope="col" class="ng-wind-header-item py-3 dark:text-slate-100 ">
+                  Actions
+                </th>
+              </tr>
+            }
+            </thead>
+
+            @if(rowData.length == undefined){
+            <div class="text-center w-full absolute top-52">
+              <button
+                disabled
+                type="button"
+                class="py-2.5 px-5 me-2 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 inline-flex items-center"
+              >
+                <svg
+                  aria-hidden="true"
+                  role="status"
+                  class="inline w-4 h-4 me-3 text-gray-200 animate-spin dark:text-gray-600"
+                  viewBox="0 0 100 101"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                    fill="currentColor"
+                  />
+                  <path
+                    d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                    fill="#1C64F2"
+                  />
+                </svg>
+                Loading...
+              </button>
+            </div>
+            } @else {
+            <tbody class="flex-1 sm:flex-none dark:bg-zinc-400">
+              <tr class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0" *ngIf="isCreate && modelObj">
+                <td [attr.colspan]="keys.length+1">
+                  <app-form
+                  
+                    (updateData)="saveData($event)"
+                    [idFieldName]="idFieldName"
+                    [controlData]="modelObj"
+                    [isCreate]="true"
+                    
+                  >
+                  @if (isProduct) {
+                   
+                    <div class="flex justify-between">
+                      <div class="my-2 mx-3">
+                        <label
+                        for=""
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        > Categories</label>
+                
+                        <input-search (selectedList)="getCategories($event)" [selectedMax]="3" [resultList]="resultListCat" (inputValue)="inputValue.emit({value: $event, type: 'category'})"></input-search>
+                      </div>
+ 
+                      <div class="my-2 mx-3">
+                        <label
+                        for=""
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        > Brand</label>
+                       <input-search (selectedList)="getBrand($event)" [selectedMax]="1" [resultList]="resultListBrand" (inputValue)="inputValue.emit({value: $event, type: 'brand'})"></input-search>
+                     </div>
+
+                    </div>
+                    <app-form
+                    [type]="'Add'"
+                    (updateDataList)="getImages($event)"
+                    [controlData]="image"
+                  >
+                  </app-form>
+                  }
+               </app-form>
+               <div class="ms-3">
+                 <button (click)="submitForm()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Accept</button>
+
+               </div>
+
+                </td>
+              </tr>
+              @for (product of rowData; track $index){
+
+              <tr class="flex flex-col flex-no wrap sm:table-row sm:mb-0 bg-white border-b hover:bg-gray-50  dark:bg-zinc-500">
+               
+                <td
+                  *ngFor="let o of keys"
+                  class="px-4 sm:py-4 py-[9px] max-w-[200px] overflow-hidden font-medium dark:text-slate-200 text-gray-800 whitespace-nowrap"
+                >
+                @if (isArray(product[o])) {
+                  {{product[o]}}
+
+                }@else {
+                  <div class="cursor-pointer hover:bg-slate-500 dark:hover:bg-slate-200 dark:hover:text-slate-600 hover:text-slate-100 w-fit p-3" (click)="showList(product[o], $index)">
+                      Mostrar Lista
+                  </div> 
+                }
+                </td>
+
+                <td class="px-6 sm:py-4 py-[0.58rem] gap-2 flex">
+                  <button
+                    (click)="itemId != $index? editItem($index) : itemId = -1"
+                    class="align-middle select-none font-sans font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] h-10 max-h-[40px] rounded-lg text-xs bg-blue-500 text-white shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
+                    type="button"
+                  >
+                    <span class=" ">
+                      <img
+                        class="w-5 ms-[10px]"
+                        [src]="itemId != $index? '../../../../../assets/images/icons/edit.svg': '../../../../../assets/images/icons/cancel.svg'"
+                        alt=""
+                    /></span>
+                  </button>
+                  <button
+                    class="align-middle select-none font-sans font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] h-10 max-h-[40px] rounded-lg text-xs bg-red-500 text-white shadow-md shadow-red-500/20 hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
+                    type="button"
+                  >
+                    <span
+                      class="transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                    >
+                      <img
+                        class="w-5 ms-[10px]"
+                        src="../../../../../assets/images/icons/delete.svg"
+                        alt=""
+                    /></span>
+                  </button>
+                </td>
+              </tr>
+              <tr class=" flex flex-col flex-no wrap sm:table-row sm:mb-0">
+                @if (indexSublist == $index) {
+                  <td [attr.colspan]="keys.length+1">
+                    <data-table  [idFieldName]="'propertyid'" [modelObj]=" sublist[0]" [pagination]="pagination" [isSublist]="true" [rowData]="sublist"></data-table>
+                </td>
+                  }
+                <td [attr.colspan]="keys.length+1" *ngIf="itemId == $index">
+                  <app-form
+                    (updateData)="form.emit($event)"
+                    [controlData]="product"
+                  >
+                 
+                  @if (isProduct) {
+                 
+                    <div class="flex justify-between">
+                      <div class="my-2 mx-3">
+                        <label
+                        for=""
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        > Categories</label
+                      >
+                        <input-search (selectedList)="selectedListCat.emit($event)" [selectedMax]="3" [itemsToUpdate]="mapResultList(updateData[$index].categories)" [resultList]="resultListCat" (inputValue)="inputValue.emit({value: $event, type: 'category'})"></input-search>
+                      </div>
+ 
+                      <div class="my-2 mx-3">
+                        <label
+                        for=""
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        > Brand</label>
+                       <input-search (selectedList)="selectedListBrand.emit($event)" [selectedMax]="1" [itemsToUpdate]="mapResultListB([updateData[$index].brand])" [resultList]="resultListBrand" (inputValue)="inputValue.emit({value: $event, type: 'brand'})"></input-search>
+                     </div>
+                      
+                    </div>
+                  }
+                
+                </app-form>
+                </td>
+              </tr>
+              }
+            </tbody>
+            }
+          </table>
+        </div>
+      </div>
+      @if (pagination.count && pagination.count !=0 && itemId == -1) {
+        <pagination [pagination]="pagination" (goToPage)="[pagination = $event, goToPage.emit($event.page)]"></pagination>
+
+      }
+    </div>
+  </div>
+</div>

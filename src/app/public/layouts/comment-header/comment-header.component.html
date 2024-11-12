@@ -1,0 +1,16 @@
+
+   <div  class=" pb-4 mb-4 border-b-2 border-blue-50 w-full justify-between flex ">
+@if (commentHeader) {
+   <header-stars [scoreList]="commentHeader.scoreList"></header-stars>
+   <star-score  [starSize]="7" [score]="commentHeader.overallScore"></star-score>
+
+}
+   
+  
+
+</div>
+<comment-form (commentFormData)="comment.emit($event)" class="flex flex-col w-full"></comment-form>
+@if (commentHeader) {
+<commets [comments]="commentHeader.comments"></commets>
+<pagination [pagination]="pagination" (goToPage)="goToPage($event.page)"></pagination>
+}

@@ -1,0 +1,25 @@
+<details open class="m-5 max-w-md w-64 overflow-hidden rounded-lg border border-gray-200 open:shadow-lg text-gray-700">
+    <summary class="flex cursor-pointer select-none items-center justify-between bg-gray-100 px-5 py-3 lg:hidden">
+      <span class="text-sm font-medium"> Toggle Filters </span>
+
+      <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </summary>
+    <form action="" class=" border-t border-gray-200 lg:border-t-0">
+        @for (data of filterData; track $index) {
+            <fieldset class="w-full">
+              <legend class="block w-full dark:text-gray-100 bg-gray-50 dark:bg-slate-500 px-5 py-3 text-xs font-medium">{{data.title}}</legend>   
+                  <app-filter-item (selected)="filterSelected($event)" class=" cursor-pointer" [data]="data.list" [type]="data.isSingle"></app-filter-item>
+            </fieldset>
+        } 
+    </form>
+    <div class="">
+      <div class="flex justify-between border-t border-gray-200 px-5 py-3">
+        <button name="reset" type="button" class="rounded text-xs font-medium text-gray-600 underline">Reset All</button>
+        <button name="commit" type="button" class="rounded bg-blue-600 px-5 py-3 text-xs font-medium text-white active:scale-95">Apply Filters</button>
+      </div>
+    </div>
+  </details>
+
+

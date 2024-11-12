@@ -1,0 +1,16 @@
+<div class="flex-grow-0">
+    <div class="h-5"></div>
+<div class="flex justify-between px-3 py-2 bg-slate-100 dark:bg-gray-600">
+    <div></div>
+    <app-select [data]="orderSelect" (selected)="sortSelected($event)"></app-select>
+</div>
+<div class="flex">
+
+    
+    <app-product-filter (filter)="applyFilter($event)" *ngIf="filterProperties" [filterData]="filterProperties"></app-product-filter>
+    <app-card [loading]="loading" [products]="products"></app-card>
+</div>
+   
+        
+</div>
+

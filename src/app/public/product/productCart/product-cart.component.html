@@ -1,0 +1,247 @@
+<div class=" cart-container flex justify-center gap-3 ">
+  @if (cart) {
+  <div class="flex-row mb flex-wrap mt-40 justify-center align-middle">
+    @if (cart.cartProducts.length>0) { @for (item of cart.cartProducts; track
+    $index) {
+    <div
+      class="relative flex mb-3 h-40 bg-white border border-gray-200 rounded-sm shadow md:flex-row md:max-w-3xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
+    >
+      <!-- <img
+        class="object-cover rounded-t-sm md:h-auto md:w-40 md:rounded-none md:rounded-s-sm"
+        [src]="item.imageUrl"
+        alt=""
+      /> -->
+
+      <div class=" relative w-full justify-between p-4 leading-normal ">
+        <div class="dark:text-slate-100">
+          <div class="flex justify-between ">
+            <h5
+              class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white"
+            >
+              {{item.name}}
+            </h5>
+            
+            <p class="font-semibold mb-3 text-gray-700 dark:text-gray-400">
+              $ {{item.price}}
+            </p>
+          </div>
+          <p class="text-xs" [innerHTML]="item.description"></p>
+
+        </div>
+
+        <!-- quantity -->
+
+        <div class=" absolute bottom-1 gap-1 flex w-fit content-center px-3 py-1 bg-slate-100 rounded-sm ">
+          <div>qty</div>
+          <div class="flex justify-center gap-2 content-center">
+            <svg
+              (click)="qtyAction('minus', $index)"
+              class=" w-4  text-black hover:fill-current hover:text-black fill-current"
+              fill="none"
+              version="1.1"
+              id="Layer_1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              viewBox="0 0 511.947 511.947"
+              xml:space="preserve"
+            >
+              <g>
+                <g>
+                  <path
+                    d="M211.76,256.027l195.733-195.52c4.16-4.16,4.16-10.88,0-15.04L365.147,3.12c-4.16-4.16-10.88-4.16-15.04,0
+                          L104.453,248.453c-4.16,4.16-4.16,10.88,0,15.04l245.653,245.333c4.16,4.16,10.88,4.16,15.04,0l42.347-42.24
+                          c4.16-4.16,4.16-10.88,0-15.04L211.76,256.027z M357.573,486.213L127.067,256.027L357.573,25.733l27.307,27.2L189.04,248.347
+                          c-4.16,4.16-4.16,10.88,0,15.04l195.733,195.52L357.573,486.213z"
+                  />
+                </g>
+              </g>
+            </svg>
+            <div class="">
+              {{item.quantity}}
+            </div>
+            <svg
+            (click)="qtyAction('plus', $index)"
+              class=" w-4 stroke-orange-200 text-black hover:fill-current hover:text-black fill-current"
+              fill="none"
+              version="1.1"
+              id="Layer_1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              viewBox="0 0 511.947 511.947"
+              xml:space="preserve"
+            >
+              <g>
+                <g>
+                  <path
+                    d="M407.553,248.453L161.9,3.12c-4.16-4.16-10.88-4.16-15.04,0l-42.453,42.347c-4.16,4.16-4.16,10.88,0,15.04l195.733,195.52
+                                     l-195.733,195.52c-4.16,4.16-4.16,10.88,0,15.04l42.347,42.24c4.16,4.16,10.88,4.16,15.04,0l245.653-245.333
+                                     C411.713,259.44,411.713,252.613,407.553,248.453z M154.327,486.32l-27.307-27.2L322.753,263.6c4.16-4.16,4.16-10.88,0-15.04
+                                     L127.127,53.04l27.307-27.2L384.94,256.027L154.327,486.32z"
+                  />
+                </g>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+      
+      <div></div>
+      <button
+        (click)="removeItem(item.productId)"
+        class="absolute px-1 rounded-sm flex gap-1 bottom-1 right-1 cursor-pointer bg-slate-100"
+      >
+        <div>
+          <svg
+            class="stroke-red-500 w-4 py-1"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M10 11V17"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M14 11V17"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M4 7H20"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M6 7H12H18V18C18 19.6569 16.6569 21 15 21H9C7.34315 21 6 19.6569 6 18V7Z"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+        <span>Delete</span>
+      </button>
+      
+
+    </div>
+
+    } }@else {
+    <div>
+      No hay ni mergas
+    </div>
+    }
+  </div>
+
+  }
+  <div class="mt-40">
+    <div
+     
+      class="block max-w-sm p-6 bg-white border border-gray-200 rounded-sm shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+    >
+      <h5
+        class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white"
+      >
+        Coupon Code
+      </h5>
+      <div class="flex justify-between gap-2">
+        <input
+        #code
+          class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+          id="grid-last-name"
+          type="text"
+          placeholder="Input code"
+        />
+        <button (click)="applyCode(code.value)" class="py-3 px-4 bg-gray-200 rounded">Apply</button>
+      </div>
+      @if (showCouponError) {
+        <label [style.color]="couponMsg.color" class="text-red-400 text-sm">{{couponMsg.msg}}</label>        
+      }
+    </div>
+    <div
+      class="mt-2 w-full max-w-md p-2 bg-white border border-gray-200 rounded-ms shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700"
+    >
+      <div class="flex items-center justify-between mb-4">
+        <h5
+          class="text-xl font-bold leading-none text-gray-900 dark:text-white"
+        >
+          Summary
+        </h5>
+      </div>
+      <div class="flow-root">
+        <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+          @if (cart) {
+          <li class="py-3 sm:py-4">
+            <div class="flex items-center">
+              <div class="flex-1 min-w-0 ms-2">
+                <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                  Items
+                </p>
+              </div>
+              
+                <div 
+                class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white"
+                >
+                $ {{cart.cartHeader.cartTotal}}
+                </div>
+
+              
+            </div>
+          </li>
+          <li class="py-3 sm:py-4">
+            <div class="flex items-center">
+              <div class="flex-1 min-w-0 ms-2">
+                <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                  Discount
+                </p>
+              </div>
+              <div
+                class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white"
+              >
+                $ {{cart.cartHeader.discount}}
+              </div>
+            </div>
+          </li>
+          <li class="py-3 sm:py-4">
+            <div class="flex items-center">
+              <div class="flex-1 min-w-0 ms-2">
+                <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                  Total
+                </p>
+              </div>
+              <div
+                class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white"
+              >
+                $ {{cart.cartHeader.cartTotal - cart.cartHeader.discount}}
+              </div>
+            </div>
+          </li>
+        }
+        </ul>
+      </div>
+    </div>
+    <div
+    href="#"
+    class="mt-2 w-full block max-w-sm p-6 bg-white border border-gray-200 rounded-sm shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+  >
+  
+      <button (click)="checkout($event)" class="py-3 w-full px-4 bg-gray-200 rounded">CHECKOUT</button>
+   
+  </div>
+  </div>
+ 
+</div>
+<div >
+  <app-modal [show]="showModal" (closeModal)="showModal = false">
+    <app-signin (loginSuccess)="showModal = false"></app-signin>
+  </app-modal>
+</div>
