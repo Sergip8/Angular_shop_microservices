@@ -1,6 +1,9 @@
-# AngularShop2
+# AngularShop
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.3.
+
+### Backend repo:
+- https://github.com/Sergip8/.Net_C-_shop_microservices
 
 ## Development server
 
