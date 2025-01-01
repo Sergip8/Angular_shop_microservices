@@ -23,8 +23,8 @@ export class HomeComponent implements OnInit{
   getHomeProducts(){
     this.productService.getHomeProducts().subscribe({
       next: data => {
-        this.homeProducts = data.data
-        console.log(this.homeProducts)
+        this.homeProducts = data
+        console.log(data)
       },
       error: e => console.log(e)
     })

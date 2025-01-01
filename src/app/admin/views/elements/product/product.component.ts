@@ -19,7 +19,7 @@ export class ResultList{
   id: number = 0
 }
 
-const baseUrl = "https://localhost:8003/api/ProductApi"
+const baseUrl = "http://localhost:8001/api/ProductApi"
 @Component({
     selector: 'admin-alert',
     standalone: true,
@@ -120,11 +120,11 @@ size = 8
           const productData = <ProductData[]>data.data
           
           this.productData = productData
-          this.products = productData.map(p => p.product)
+          this.products = productData.map(p => p)
         }
         this.pagination = {page: this.page, size: this.size,count: data.count}
       },
-      error: e => console.log(e.code)
+      error: e => console.log(e)
 
     })
   }
@@ -151,6 +151,7 @@ size = 8
   //     })
   // }
   updateProduct(product: ProductWrite){
+    console.log(product)
     this.http.put<ProductRequest>(baseUrl, product).subscribe({
       next: data => {
         
@@ -175,7 +176,8 @@ size = 8
     this.http.post<ProductRequest>(baseUrl, product).subscribe({
       next: data => {
         const productData = <ProductData>data.products
-        this.products.unshift(productData.product)
+        if(productData)
+          this.products.unshift(productData)
         console.log(data.products)
         this.alertMsg = data.message
         if(data.success){

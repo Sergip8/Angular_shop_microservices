@@ -5,7 +5,7 @@ import {BehaviorSubject, Observable} from "rxjs";
 import {AuthResponse} from "./auth.response";
 import { AuthRequest, LoginRequest, LoginResponse, RegistrationResponse } from './auth-models';
 
-const baseUrl = "https://localhost:8002/api/AuthApi/"
+const baseUrl = "http://localhost:8000/api/AuthApi/"
 
 @Injectable({
   providedIn: 'root'

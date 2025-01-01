@@ -39,7 +39,7 @@ export class ProductPropertyComponent  implements OnInit {
       next: data => {
         if(data.data){
           this.productPropertyType = <ProductPropertyType[]>data.data
-
+          console.log(this.productPropertyType)
       }
         this.pagination = {page: this.page, size: this.size,count: data.count}
         console.log(this.pagination.count)

@@ -3,18 +3,25 @@
     @if (loading) {
 
     }@else {
-        <div class="w-full text-3xl py-3">
-            {{productData.product.name}}
-        </div>
-        <div *ngIf="productData" class="pt-6 flex w-full justify-between gap-5 lg:gap-10">
-            <home-carousel  [items]="productData.images"></home-carousel>
-            <details-main-info-card class="w-full" [product]="productData"></details-main-info-card>
-        </div>
-        <property-tables [properties]="productData.properties"></property-tables>
-        <comment-header (comment)="storeComment($event)" [commentHeader]="productData.comment"></comment-header>
-
+        @if(productData){
+            <div class="w-full text-3xl py-3">
+                {{productData.name}}
+            </div>
+            <div class="pt-6 flex w-full justify-between gap-5 lg:gap-10">
+                <home-carousel  [items]="productData.images"></home-carousel>
+                <details-main-info-card class="w-full" [product]="productData" >
+                    <star-score *ngIf="productComments?.overallScore" [score]="productComments.overallScore"></star-score>
+                    <div>
+                        {{productData.inventory.vendorName}}
+                    </div>
+                </details-main-info-card>
+            </div>
+            <property-tables [properties]="properties"></property-tables>
+        }
+        @if (productComments) {
+            <comment-header (comment)="storeComment($event)" [commentHeader]="productComments"></comment-header>
+        }
     }
-
 
 </div>
 

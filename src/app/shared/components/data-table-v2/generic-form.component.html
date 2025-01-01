@@ -1,0 +1,92 @@
+<form
+  [formGroup]="formGroup"
+  (ngSubmit)="onSubmit()"
+  class="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg space-y-6"
+>
+  <!-- Manejo para objeto simple -->
+  <div *ngIf="isSimpleObject(data); else complexForm" class="space-y-4">
+    <div *ngFor="let key of objectKeys(data)" class="flex flex-col space-y-2">
+      <label class="text-sm font-medium text-gray-700">
+        {{ key | titlecase }}
+      </label>
+      <input
+        class="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        [formControlName]="key"
+        [readonly]="key.endsWith('Id')"
+        type="text"
+      />
+    </div>
+  </div>
+
+  <!-- Manejo para objeto compuesto -->
+  <ng-template #complexForm>
+    <div *ngFor="let section of objectKeys(data)" class="space-y-4">
+      <!-- Sección título -->
+      <h2 class="text-xl font-semibold text-gray-800 border-b pb-2">
+        {{ section | titlecase }}
+      </h2>
+
+      <!-- Si el valor es un objeto -->
+      <div *ngIf="isObject(data[section]); else arrayTemplate" [formGroupName]="section">
+        <div *ngFor="let key of objectKeys(data[section])" class="flex flex-col space-y-2">
+          <label class="text-sm font-medium text-gray-700">
+            {{ key | titlecase }}
+          </label>
+          <input
+            class="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            [formControlName]="key"
+            [readonly]="key.endsWith('Id')"
+            type="text"
+          />
+        </div>
+      </div>
+
+      <!-- Si el valor es un arreglo -->
+      <ng-template #arrayTemplate>
+        <div formArrayName="{{ section }}">
+          <div
+            *ngFor="let item of getFormArray(section).controls; let i = index"
+            [formGroupName]="i"
+            class="space-y-2 border border-gray-300 rounded-lg p-4 mb-4"
+          >
+            <div *ngFor="let key of objectKeys(data[section][0])" class="flex flex-col space-y-2">
+              <label class="text-sm font-medium text-gray-700">
+                {{ key | titlecase }}
+              </label>
+              <input
+                class="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                [formControlName]="key"
+                [readonly]="key.endsWith('Id')"
+                type="text"
+              />
+            </div>
+            <button
+              type="button"
+              (click)="removeItem(section, i)"
+              class="mt-2 px-4 py-2 text-sm text-white bg-red-500 rounded-md hover:bg-red-600"
+            >
+              Eliminar
+            </button>
+          </div>
+          <button
+            type="button"
+            (click)="addItem(section)"
+            class="px-4 py-2 text-sm text-white bg-green-500 rounded-md hover:bg-green-600"
+          >
+            Añadir Elemento
+          </button>
+        </div>
+      </ng-template>
+    </div>
+  </ng-template>
+
+  <!-- Botón de enviar -->
+  <div class="text-center">
+    <button
+      type="submit"
+      class="px-6 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600"
+    >
+      Guardar
+    </button>
+  </div>
+</form>

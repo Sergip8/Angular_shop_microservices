@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { DatetimeHelper } from '../../../_core/helpers/datetime.helper';
 import { Images } from '../../../../assets/data/images';
 import { ProductData } from '../../../models/product';
-import { CurrencyPipe, DecimalPipe, NgClass, NgFor, NumberFormatStyle } from '@angular/common';
+import { CurrencyPipe, DecimalPipe, NgClass, NgFor, } from '@angular/common';
 import { StarScoreComponent } from './star-score';
 import { SelectComponent } from '../../../shared/components/select/select';
 

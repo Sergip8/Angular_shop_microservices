@@ -15,4 +15,10 @@ export class Comment{
     score: number = 0
     votes: number = 0
     commentHeaderId: number = 0
+    userDetails: CommentUserDetails = new CommentUserDetails
+}
+export class CommentUserDetails{
+    userId: string = "1"
+    name: string = "user"
+    email: string = "user"
 }

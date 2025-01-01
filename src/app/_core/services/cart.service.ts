@@ -4,7 +4,7 @@ import { CartDb } from "../../models/shopping-cart"
 import { CouponRequest } from "../../models/coupon"
 import { BehaviorSubject } from "rxjs"
 
-const baseUrl = "https://localhost:8001/api/cart"
+const baseUrl = "http://localhost:8000/api/cart"
 
 @Injectable({
   providedIn: 'root'

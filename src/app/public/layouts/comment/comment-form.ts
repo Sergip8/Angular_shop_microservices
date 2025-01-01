@@ -1,7 +1,7 @@
 import { NgClass, NgFor } from "@angular/common"
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core"
 import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms"
-import { Comment } from "../../../models/comments"
+import { Comment, CommentUserDetails } from "../../../models/comments"
 
 
 @Component({
@@ -49,7 +49,8 @@ onSubmit() {
     createdDate: new Date,
     score: this.starSelected,
     votes: 0,
-    commentHeaderId: 0
+    commentHeaderId: 0,
+    userDetails: new CommentUserDetails
   })
 }
 

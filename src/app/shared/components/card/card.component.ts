@@ -52,11 +52,11 @@ export class CardComponent implements OnInit {
   changeImage = 0
 
 async addToCart(product: Product, price: number) {
-  product.price = price
-  let indexp = this.countProducts.findIndex(item => item.productId === product.productId);
+  product.current_price = price
+  let indexp = this.countProducts.findIndex(item => item.productId === product.id);
   if(indexp == -1){
     this.cartProducts.push({...product, quantity:1})
-    this.countProducts.push({productId: product.productId, count:1})
+    this.countProducts.push({productId: product.id, count:1})
     indexp = 0
   }else{
     this.cartProducts.push({...product, quantity: this.countProducts[indexp].count})
@@ -68,8 +68,8 @@ async addToCart(product: Product, price: number) {
   
   //console.log(cart)
   if(cart){
-    cart.cartHeader.cartTotal += product.price * this.countProducts[indexp].count
-    const index = cart.cartProducts.findIndex(item => item.productId === product.productId);
+    cart.cartHeader.cartTotal += product.current_price * this.countProducts[indexp].count
+    const index = cart.cartProducts.findIndex(item => item.id === product.id);
     if(index == -1){
       cart.cartProducts.push({...product, quantity: this.countProducts[indexp].count})
       await this.guardarCarrito({cartId:1, cartProducts: cart.cartProducts, cartHeader: cart.cartHeader})
@@ -84,14 +84,14 @@ async addToCart(product: Product, price: number) {
     const header = {
       couponCode: "",
       discount: 0,
-      cartTotal: product.price * this.countProducts[indexp].count
+      cartTotal: product.current_price * this.countProducts[indexp].count
     }
     await this.guardarCarrito({cartId:1, cartProducts: [this.cartProducts[indexp]], cartHeader: header})
 
   }
   const userId = this.auth.getUserId()
  this.cartHeader.userId = userId
- this.cartDetails.productId = product.productId
+ this.cartDetails.productId = product.id
  this.cartDetails.count = this.countProducts[indexp]?.count
   console.log(this.cartDetails)
   this.cart.cartDetails = [this.cartDetails]

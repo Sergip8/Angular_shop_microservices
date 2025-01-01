@@ -12,7 +12,7 @@ import { Pagination } from '../../../../models/pagination';
 import { CategoryService } from '../../../../_core/services/category.service';
 import { Category } from '../../../../models/category';
 
-const baseUrl = "https://localhost:8001/api/CouponApi"
+const baseUrl = "http://localhost:8001/api/CouponApi"
 @Component({
   selector: 'admin-alert',
   standalone: true,

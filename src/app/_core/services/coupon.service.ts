@@ -4,7 +4,7 @@ import { Coupon, CouponRequest } from '../../models/coupon';
 
 
 
-const baseUrl = "https://localhost:8004/api/CouponApi"
+const baseUrl = "http://localhost:8001/api/CouponApi"
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,6 @@ export class CouponService {
    getCouponById(id: number){
     return this._http.get<CouponRequest>(baseUrl+"/"+id)
    }
-
    getCouponByCode(code: string){
     return this._http.get<CouponRequest>(baseUrl+"/code/"+code)
    }

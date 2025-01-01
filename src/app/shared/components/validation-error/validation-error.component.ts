@@ -21,7 +21,7 @@ export class ValidationErrorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.fieldControl)
+    //console.log(this.fieldControl)
   }
 
   hasError(): boolean {

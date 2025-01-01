@@ -25,6 +25,7 @@ import { CommentService } from '../../_core/services/comment.service';
 import { PropertyTableComponent } from '../layouts/property-table/property-table.component';
 import { FallbackImgDirective } from '../../shared/directives/fallback-img.directive';
 import { ProductFilterComponent } from './product-filter/product-filter.component';
+import { StarScoreComponent } from '../layouts/details-main-info-card/star-score';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { ProductFilterComponent } from './product-filter/product-filter.componen
     DetailsMainInfoCardComponent,
     CommentHeaderComponent,
     PropertyTableComponent,
-    ProductFilterComponent
+    ProductFilterComponent,
+    StarScoreComponent
   ],
   exports: [
     ProductResultsComponent,

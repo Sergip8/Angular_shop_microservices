@@ -8,6 +8,7 @@ import { ResultList } from '../../../admin/views/elements/product/product.compon
 import { CategoryDataRequest } from '../../../models/category';
 import { Brand } from '../../../models/brand';
 import { PaginationComponent } from '../pagination/pagination.component';
+import { GenericFormComponent } from "../data-table-v2/generic-form.component";
 
 
 export enum InputType{
@@ -18,7 +19,7 @@ export enum InputType{
 @Component({
   selector: 'data-table',
   standalone: true,
-  imports: [NgClass, NgIf, NgFor, KeyValuePipe, FormComponent, InputSearchComponent, PaginationComponent],
+  imports: [NgClass, NgIf, NgFor, KeyValuePipe, FormComponent, InputSearchComponent, PaginationComponent, GenericFormComponent],
   templateUrl: './data-table.component.html',
   styleUrl: './data-table.component.css',
 })
@@ -45,11 +46,11 @@ isArray(value: any) {
   indexSublist = -1
 
 mapResultList(cat: CategoryDataRequest[]): ResultList[] {
-  console.log(cat)
+  //console.log(cat)
   return cat.map(c => Object.assign({id: c.categoryId, value: c.categoryName}))
 }
 mapResultListB(cat: Brand[]): ResultList[] {
-  console.log(cat)
+  //console.log(cat)
   return cat.map(c => Object.assign({id: c.brandId, value: c.brandName}))
 }
   showCatErrors: boolean = false
@@ -82,7 +83,7 @@ saveData($event: any) {
   //     this.showCatErrors = false
   //   }, 2500);
   // }
-  console.log(this.images)
+  console.log($event)
   if(this.isProduct){
 
     this.product.productId = $event.productId
@@ -168,7 +169,9 @@ constructor(){
  this.image = new Images()
 }
   ngOnInit(): void {
-  
+    if (this.isProduct){
+
+    }
   }
 
 submitForm() {
@@ -225,5 +228,9 @@ submitForm() {
     if (!clickInside) {
       this.isDropdownOpen = false;
     }
+  }
+  updateDataForm(data: any, index: number){
+
+    this.form.emit(data)
   }
   }

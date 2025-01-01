@@ -4,7 +4,7 @@ import { CouponRequest } from "../../models/coupon"
 import { Category, CategoryRequest } from "../../models/category"
 
 
-const baseUrl = "https://localhost:8003/api/Category"
+const baseUrl = "http://localhost:8001/api/Category"
 
 @Injectable({
   providedIn: 'root'

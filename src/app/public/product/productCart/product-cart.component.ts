@@ -45,7 +45,7 @@ checkout(event: Event) {
       details.push({
         cartDetailsId: 0,
         cartHeaderId: 0,
-        productId: c.productId,
+        productId: c.id,
         count: c.quantity
       })
     })
@@ -81,10 +81,10 @@ async qtyAction(type: string, index: number) {
  
   if(type === "minus"){
       product.quantity -=1 
-      this.cart.cartHeader.cartTotal -=product.price
+      this.cart.cartHeader.cartTotal -=product.current_price
       await db.guardarCarrito(this.cart)
       if(product.quantity === 0){
-        this.removeItem(product.productId)
+        this.removeItem(product.id)
         const dbCart = await db.obtenerCarrito(1)
         if (dbCart?.cartProducts.length === 0){
           this.cart = {cartId: 1, cartHeader: new CartHeader, cartProducts: []}
@@ -95,7 +95,7 @@ async qtyAction(type: string, index: number) {
       }
   }
   if(type === "plus"){
-    this.cart.cartHeader.cartTotal +=product.price
+    this.cart.cartHeader.cartTotal +=product.current_price
       product.quantity +=1 
   }
   
@@ -105,7 +105,7 @@ async qtyAction(type: string, index: number) {
   this.updateQty(this.cart.cartProducts)
 }
 async removeItem(productId: number) {
-  this.cartItems = this.cart.cartProducts.filter(cp => cp.productId !== productId)
+  this.cartItems = this.cart.cartProducts.filter(cp => cp.id !== productId)
   this.cart.cartProducts = this.cartItems
   await db.guardarCarrito(this.cart)
   const dbCart = await db.obtenerCarrito(1)
@@ -133,7 +133,7 @@ constructor(){
   }
 
 updateQty(products: CartProduct[]){
-  this.sum = products.reduce((total, producto) => total + (producto.price * producto.quantity), 0)
+  this.sum = products.reduce((total, producto) => total + (producto.current_price * producto.quantity), 0)
 }
 async getCouponCode(code: string){
   this.couponService.getCouponByCode(code).subscribe({

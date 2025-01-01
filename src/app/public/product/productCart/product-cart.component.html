@@ -22,7 +22,7 @@
             </h5>
             
             <p class="font-semibold mb-3 text-gray-700 dark:text-gray-400">
-              $ {{item.price}}
+              $ {{item.current_price}}
             </p>
           </div>
           <p class="text-xs" [innerHTML]="item.description"></p>
@@ -87,7 +87,7 @@
       
       <div></div>
       <button
-        (click)="removeItem(item.productId)"
+        (click)="removeItem(item.id)"
         class="absolute px-1 rounded-sm flex gap-1 bottom-1 right-1 cursor-pointer bg-slate-100"
       >
         <div>

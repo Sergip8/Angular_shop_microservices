@@ -231,8 +231,9 @@
                 </td>
                   }
                 <td [attr.colspan]="keys.length+1" *ngIf="itemId == $index">
-                  <app-form
-                    (updateData)="form.emit($event)"
+                  <app-generic-form [data]="updateData[$index]" (res)="form.emit($event)"></app-generic-form>
+                  <!-- <app-form
+                    (updateData)="updateDataForm($event, $index)"
                     [controlData]="product"
                   >
                  
@@ -259,7 +260,11 @@
                     </div>
                   }
                 
-                </app-form>
+                </app-form> -->
+                <div class="ms-3">
+                  <button (click)="submitForm()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Accept</button>
+ 
+                </div>
                 </td>
               </tr>
               }
@@ -268,7 +273,7 @@
           </table>
         </div>
       </div>
-      @if (pagination.count && pagination.count !=0 && itemId == -1) {
+      @if (pagination?.count && pagination.count !=0 && itemId == -1) {
         <pagination [pagination]="pagination" (goToPage)="[pagination = $event, goToPage.emit($event.page)]"></pagination>
 
       }

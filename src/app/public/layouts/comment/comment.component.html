@@ -4,8 +4,8 @@
       <!-- Profile and Rating -->
       <div class="flex justify justify-between">
           <div class="flex gap-2">
-              <div class="w-7 h-7 text-center rounded-full bg-red-500">J</div>
-              <span>{{c.title}}</span>
+              <div class="w-7 h-7 text-center pt-[2px] rounded-full bg-red-500">{{c.userDetails.name[0].toUpperCase()}}</div>
+              <span>{{c.userDetails.name}}</span>
           </div>
          <star-score [score]="c.score"></star-score>
       </div>

@@ -150,7 +150,7 @@ confirm() {
   ngOnChanges(changes: SimpleChanges) {
     // if(changes["controlData"].firstChange){
     //   //this.setFormControlNames(this.controlData)
-    //   console.log(this.keysInput)
+    //   console.log(this.keysInput)}
     // //   console.log(changes["controlData"].firstChange)
     // //   this.keysInput = Object.keys(this.controlData);
     // //   const list:any = this.keysInput.map(key => {

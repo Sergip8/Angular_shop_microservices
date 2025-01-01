@@ -10,7 +10,7 @@ import { FormComponent } from '../../../../shared/components/form/form.component
 import { DataTableComponent } from '../../../../shared/components/data-table/data-table.component';
 import { Pagination } from '../../../../models/pagination';
 
-const baseUrl = "https://localhost:8004/api/CouponApi"
+const baseUrl = "http://localhost:8001/api/CouponApi"
 @Component({
   selector: 'admin-alert',
   standalone: true,

@@ -2,11 +2,13 @@ import { FilterList } from "../public/product/product-filter/filter-item"
 import { Brand } from "./brand"
 import { Category, CategoryDataRequest, CategoryRequest } from "./category"
 import { CommentHeader } from "./comments"
+import { Inventory } from "./inventory"
 
 export class Product{
-    productId: number = 0
+    id: number = 0
     name: string = ""
-    price: number = 0
+    previous_price: number = 0
+    current_price: number = 0
     link: string = ""
     //categoryName: string = ""
     description: string = ""
@@ -32,11 +34,16 @@ export class Product{
 //     categoryProductDTO: CategoryRead[] = []
 // }
 export interface ProductData{
-    product: Product,
+    id: number
+    name: string
+    previous_price: number
+    current_price: number
+    link: string
+    //categoryName: string = ""
+    description: string
     brand: Brand,
     categories: CategoryDataRequest[]
-    price: PriceRange
-    link: string
+    inventory: Inventory
     images: Images[]
     comment: CommentHeader
     properties: GroupedProperties[]
@@ -90,9 +97,9 @@ export class Order{
     direction: string = ""
 }
 export interface CartProduct{
-    productId: number
+    id: number
     name: string
-    price: number
+    current_price: number
     //imageUrl: string
     description: string 
     quantity: number

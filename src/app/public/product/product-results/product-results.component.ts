@@ -5,7 +5,7 @@ import { Pagination } from '../../../models/pagination';
 import { CardComponent } from '../../../shared/components/card/card.component';
 import { FilterItem, FilterList } from '../product-filter/filter-item';
 
-const baseUrl = "https://localhost:8003/api/ProductApi"
+const baseUrl = "http://localhost:8000/api/ProductApi"
 
 @Component({
   selector: 'app-product-res',
